@@ -22,6 +22,7 @@ def ticket_handler(bot, job):
         for ticket in ticket_list:
             nmb = ticket['ticket']
             theme = ticket['theme']
+            theme = theme.replace('[', '\[')
             url = ticket['url']
             action = ticket['action']
             if action == 'Task created':
@@ -47,6 +48,5 @@ if __name__ == '__main__':
     jobs = bot.job_queue
     job_minute = jobs.run_repeating(ticket_handler, interval=10, first=0)
     dp = bot.dispatcher
-    dp.add_handler(MessageHandler)
     bot.start_polling()
     bot.idle()
