@@ -1,0 +1,5 @@
+env
+.vscode
+settings.py
+bot.log
+__pycache__
