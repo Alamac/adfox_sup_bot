@@ -16,14 +16,14 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 
 def ticket_handler(bot, job):
 
-    ticket_list = get_tickets_from_emails(settings.IMAP, settings.LOGIN, settings.PASS, settings.FOLDER, settings.DEL_FOLDER)
-
     now = datetime.now()
 
     if '10' < datetime.strftime(now, '%H') < '20':
 
+        ticket_list = get_tickets_from_emails(settings.IMAP, settings.LOGIN, settings.PASS, settings.FOLDER, settings.DEL_FOLDER)
+
         if len(ticket_list) > 0:
-            
+                
             for ticket in ticket_list:
                 nmb = ticket['ticket']
                 theme = ticket['theme']
@@ -41,7 +41,7 @@ def ticket_handler(bot, job):
                 elif action == 'SLA expired':
                     sign = emojize(':bangbang:', use_aliases=True)
                     reply = f'*Истёк SLA*{sign}\n{nmb}\n*{theme}*\n{url}'
-            
+                
                 bot.send_message(chat_id='-1001361799205', text=reply, parse_mode=telegram.ParseMode.MARKDOWN)
 
 def set_support_duty(bot, update):
